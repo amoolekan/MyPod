@@ -37,8 +37,8 @@ stages{
         }  
      stage('Build Info'){
             steps {
-                sh 'This is the build Id ${BUILB_ID}'
-                sh 'This is the build URL ${BUILD_URL}'
+                sh 'echo This is the build Id ${BUILB_ID}'
+                sh 'echo This is the build URL ${BUILD_URL}'
            }
         }
 }
