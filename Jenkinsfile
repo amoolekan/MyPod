@@ -21,7 +21,7 @@ stages{
     
     stage('Rename Package'){
             steps {
-                sh 'mv ${WORKSPACE}/target/mylab-1.0-SNAPSHOT.war ${WORKSPACE}/target/mylab.war'
+                sh 'mv ${WORKSPACE}/target/*.war ${WORKSPACE}/target/mylab.war'
             }
      }
     
