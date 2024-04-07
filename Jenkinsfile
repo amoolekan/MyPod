@@ -7,23 +7,16 @@ pipeline {
     
 stages{
 
-    stage('Compile'){
+    stage('Compile & Test'){
             steps {
-                sh 'mvn clean compile'
-                sh 'echo compile completed'
+                sh 'mvn clean compile test'
+                sh 'echo Test completed'
                 }
                         }
-
-        stage('Test'){
-                    steps {
-                        sh 'mvn test'
-                        sh 'echo Test completed'
-                        }
-                             }
     
         stage('Build'){
             steps {
-                sh 'mvn package'
+                sh 'mvn clean package'
                 sh 'echo Clean build completed'
                   }
             post {
