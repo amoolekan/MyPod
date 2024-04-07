@@ -37,6 +37,15 @@ withDockerRegistry(credentialsId: '') { sh "docker build -t amoolekan/mydockerpr
 }
 }
 }    
+
+stage('Push Image') { steps {
+script {
+withDockerRegistry(credentialsId: '') { sh "docker push amoolekan/mydockerprj:latest"
+}
+}
+}
+}    
+  
     
     
     
