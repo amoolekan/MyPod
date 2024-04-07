@@ -41,7 +41,7 @@ stages{
                     }
                     }    
 
-    // 5. image pushed to dockerhub
+    // 5. image pushed to dockerhub.
     // amoolekan username for dockerhub was used as credentail for the credID DOCKERHUB.
     stage('Push Image') { steps {
         script {
