@@ -54,7 +54,7 @@ stages{
 
 
 stage('Deploy To Kubernetes') { steps {
-withKubeConfig(caCertificate: '/home/olalekan/.minikube/ca.crt', clusterName: 'minikube', contextName: 'minikube', credentialsId: '', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443') {
+withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: '', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443') {
 sh "kubectl apply -f mydockerprj.yaml"
 }
 }
