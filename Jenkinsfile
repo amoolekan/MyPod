@@ -4,7 +4,7 @@ pipeline {
     tools {
         maven 'MVN'
     }
-
+}
 stages{
         stage('Compile'){
             steps {
