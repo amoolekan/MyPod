@@ -4,23 +4,23 @@ pipeline {
     tools {
         maven 'MVN'
     }
-}
+    
 stages{
-        stage('Compile'){
+
+    stage('Compile'){
             steps {
                 sh 'mvn compile'
                 sh 'echo compile completed'
                 }
                         }
-stages{
+
         stage('Test'){
-            steps {
-                sh 'mvn Test'
-                sh 'echo Test completed'
-                }
-                     }
+                    steps {
+                        sh 'mvn Test'
+                        sh 'echo Test completed'
+                        }
+                             }
     
-stages{
         stage('Build'){
             steps {
                 sh 'mvn clean package'
