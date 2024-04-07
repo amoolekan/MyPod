@@ -46,7 +46,15 @@ withDockerRegistry(credentialsId: 'DOCKERHUB') { sh "docker push amoolekan/mydoc
 }
 }    
   
-    
+
+
+stage('Deploy To Kubernetes') { steps {
+withKubeConfig(credentialsId: 'K8S', serverUrl: 'https://13.60.17.60')  {
+sh "kubectl apply -f deployment-service.yaml"
+}
+}
+}
+
     
     
     stage('Rename Package'){
