@@ -8,7 +8,7 @@
         <title>MyJenkins</title>
     </head>
     <body>
-        <h1>Welcome To My Jenkins Project V6.6!</h1>
+        <h1>Welcome To My Jenkins Project V6.7!</h1>
  <form action="NewServlet" method="POST">
   <label>Your First name:</label><br>
   <input type="text" name="firstname"><br>
