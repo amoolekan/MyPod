@@ -16,7 +16,7 @@ stages{
 
         stage('Test'){
                     steps {
-                        sh 'mvn Test'
+                        sh 'mvn test'
                         sh 'echo Test completed'
                         }
                              }
