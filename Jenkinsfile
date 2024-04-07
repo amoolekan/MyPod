@@ -16,19 +16,19 @@ stages{
                 }
     
     // 2. Build the workload and add it to archive (optional).
-    stage('Build'){
-        steps {
-            sh 'mvn clean package'
-            sh 'echo Clean build completed'
-            }
-                post {
-                success {
-                    echo 'Archiving the artifacts 3'
-                    archiveArtifacts artifacts: '**/target/*.war'
+//    stage('Build'){
+  //      steps {
+  //          sh 'mvn clean package'
+  //          sh 'echo Clean build completed'
+  //          }
+  //              post {
+  //              success {
+  //                  echo 'Archiving the artifacts 3'
+  //                  archiveArtifacts artifacts: '**/target/*.war'
                                     
-                    }
-                    }
-                    }                        
+ //                   }
+ //                   }
+ //                   }                        
 
 
     // 4. Build the docker image with doockefile and tag it.
