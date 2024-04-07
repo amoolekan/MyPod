@@ -32,7 +32,7 @@ stages{
 
 stage('Build & Tag Docker Image') { steps {
 script {
-withDockerRegistry(credentialsId: '', toolName: 'docker') { sh "docker build -t amoolekan/mydockerprj:latest ."
+withDockerRegistry(credentialsId: 'Solution@123', toolName: 'docker') { sh "docker build -t amoolekan/mydockerprj:latest ."
 }
 }
 }
