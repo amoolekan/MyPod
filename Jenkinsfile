@@ -7,44 +7,49 @@ pipeline {
     
 stages{
 
+    # 1. Compiling anf testing the code.
     stage('Compile & Test'){
             steps {
                 sh 'mvn clean compile test'
                 sh 'echo Test completed'
                 }
-                        }
+                }
     
-        stage('Build'){
-            steps {
-                sh 'mvn clean package'
-                sh 'echo Clean build completed'
-                  }
-            post {
+    # 2. Build the workload and add it to archive (optional).
+    stage('Build'){
+        steps {
+            sh 'mvn clean package'
+            sh 'echo Clean build completed'
+            }
+                post {
                 success {
                     echo 'Archiving the artifacts 3'
                     archiveArtifacts artifacts: '**/target/*.war'
-                    
-                        }
-                }
-                   }
+                                    
+                    }
+                    }
+                    }                        
 
 
+    # 4. Build the docker image with doockefile and tag it.
+    # Jenkins acccount was added to docker group and used used as default credential.
+    stage('Build & Tag Docker Image') { steps {
+            script {
+            withDockerRegistry(credentialsId: '') { sh "docker build -t amoolekan/mydockerprj:latest ."
+                    }
+                    }
+                    }
+                    }    
 
-stage('Build & Tag Docker Image') { steps {
-script {
-withDockerRegistry(credentialsId: '') { sh "docker build -t amoolekan/mydockerprj:latest ."
-}
-}
-}
-}    
-
-stage('Push Image') { steps {
-script {
-withDockerRegistry(credentialsId: 'DOCKERHUB') { sh "docker push amoolekan/mydockerprj:latest"
-}
-}
-}
-}    
+    # 5. image pushed to dockerhub
+    # amoolekan username for dockerhub was used as credentail for the credID DOCKERHUB.
+    stage('Push Image') { steps {
+        script {
+            withDockerRegistry(credentialsId: 'DOCKERHUB') { sh "docker push amoolekan/mydockerprj:latest"
+                    }
+                    }
+                    }
+                    }    
   
 
 
