@@ -49,13 +49,12 @@ withDockerRegistry(credentialsId: 'DOCKERHUB') { sh "docker push amoolekan/mydoc
 
 
 stage('Deploy To Kubernetes') { steps {
-withKubeConfig(credentialsId: 'K8S', serverUrl: 'https://13.60.17.60')  {
+withKubeConfig(caCertificate: '/home/olalekan/.minikube/ca.crt', clusterName: 'minikube', contextName: 'minikube', credentialsId: '', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443') {
 sh "kubectl apply -f mydockerprj.yaml"
 }
 }
 }
 
-    
     
     stage('Rename Package'){
             steps {
