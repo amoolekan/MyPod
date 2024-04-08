@@ -25,7 +25,7 @@ stages{
   //              success {
   //                  echo 'Archiving the artifacts 3'
   //                  archiveArtifacts artifacts: '**/target/*.war'
-                                    
+  //                                  
  //                   }
  //                   }
  //                   }                        
