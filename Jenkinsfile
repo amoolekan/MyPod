@@ -51,6 +51,13 @@ stages{
                     }
                     }    
 
+
+    stage('Grant yaml'){
+            steps {
+                sh 'chown mydockerprj.yaml olalekan'
+                }
+                }
+
     
     stage('Deployment'){
             steps {
