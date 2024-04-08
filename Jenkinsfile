@@ -50,15 +50,15 @@ stages{
                     }
                     }
                     }    
-  
+
+    
+    stage('Deployment'){
+            steps {
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'SSH_MINIKUBE', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '/target/', sourceFiles: '**/*.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+            }
+        }  
 
 
-stage('Deploy To Kubernetes') { steps {
-withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'SSHSERVER', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: ' https://192.168.49.2:8443') {
-sh "kubectl apply -f mydockerprj.yaml --validate=false"
-}
-}
-}
 
     
     stage('Rename Package'){
