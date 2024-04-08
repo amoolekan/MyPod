@@ -65,7 +65,7 @@ stages{
    //             sh 'mv ${WORKSPACE}/target/*.war ${WORKSPACE}/target/mylab.war'
    //               }
    //                     }
-    
+   // 
   //   stage('Validation'){
    //         steps {
    //             input 'Kindly Approve This Package'
