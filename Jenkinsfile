@@ -29,7 +29,7 @@ stages{
  //                   }
  //                   }
  //                   }                        
-
+//
 
     // 4. Build the docker image with doockefile and tag it.
     // Jenkins acccount was added to docker group and used used as default credential.
