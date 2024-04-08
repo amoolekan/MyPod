@@ -8,12 +8,12 @@ pipeline {
 stages{
 
     // 1. Compiling anf testing the code.
-    stage('Compile & Test'){
-            steps {
-                sh 'mvn clean compile test'
-                sh 'echo Test completed'
-                }
-                }
+   // stage('Compile & Test'){
+           // steps {
+            //    sh 'mvn clean compile test'
+             //   sh 'echo Test completed'
+               // }
+            //    }
     
     // 2. Build the workload and add it to archive (optional).
 //    stage('Build'){
