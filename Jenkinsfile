@@ -51,9 +51,8 @@ stages{
                     }
                     }    
 
-
-    
-    stage('Deployment'){
+    // 6. Copy yaml file to minikube cluster server
+    stage('Deployment YAML'){
             steps {
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'SSH_MINIKUBE', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
             }
