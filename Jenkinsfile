@@ -54,7 +54,7 @@ stages{
 
     stage('Grant yaml'){
             steps {
-                sh 'chown mydockerprj.yaml olalekan'
+                sh 'chown olalekan mydockerprj.yaml'
                 }
                 }
 
