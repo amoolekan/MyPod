@@ -91,13 +91,13 @@ node {
   def remote = [:]
   remote.name = 'minikube'
   remote.host = '172.31.46.174'
-  remote.user = 'root'
+  remote.user = 'olalekan'
   remote.password = 'Solution@123'
   remote.allowAnyHosts = true
   stage('Remote SSH') {
     //sshCommand remote: remote, command: "cd /home/olalekan/kubeworkspace"
    // sshCommand remote: remote, command: "ls"
-    sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mydockerprj.yaml --validate=false"
+    sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mydockerprj.yaml"
   }
 }
 
