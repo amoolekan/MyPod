@@ -96,8 +96,8 @@ node {
   remote.allowAnyHosts = true
   stage('Remote SSH') {
     //sshCommand remote: remote, command: "cd /home/olalekan/kubeworkspace"
-    sshCommand remote: remote, command: "ls"
-    sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mydockerprj.yaml"
+   // sshCommand remote: remote, command: "ls"
+    sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mydockerprj.yaml --validate=false"
   }
 }
 
