@@ -92,7 +92,7 @@ node {
   remote.user = 'olalekan'
   remote.password = 'Solution@123'
   remote.allowAnyHosts = true
-  
+
   }
 
   
