@@ -58,18 +58,6 @@ stages{
             }
         }  
 
-node {
-  def remote = [:]
-  remote.name = 'minikube'
-  remote.host = '172.31.46.174'
-  remote.user = 'olalekan'
-  remote.password = 'Solution@123'
-  remote.allowAnyHosts = true
-  stage('Remote SSH') {
-    sshCommand remote: remote, command: "cd kubeworkspace"
-    sshCommand remote: remote, command: "kubectl apply -f myydockerprj.yaml"
-  }
-}
 
 //    stage('Rename Package'){
   //          steps {
@@ -97,4 +85,17 @@ node {
  //     }
       
 }
+}
+
+node {
+  def remote = [:]
+  remote.name = 'minikube'
+  remote.host = '172.31.46.174'
+  remote.user = 'olalekan'
+  remote.password = 'Solution@123'
+  remote.allowAnyHosts = true
+  stage('Remote SSH') {
+    sshCommand remote: remote, command: "cd kubeworkspace"
+    sshCommand remote: remote, command: "kubectl apply -f myydockerprj.yaml"
+  }
 }
