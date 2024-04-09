@@ -95,7 +95,7 @@ node {
   remote.password = 'Solution@123'
   remote.allowAnyHosts = true
   stage('Remote SSH') {
-    sshCommand remote: remote, command: "cd /home/olalekan/kubeworkspace"
+    sshCommand remote: remote, command: "cd /home/olalekan/kubeworkspac"
     sshCommand remote: remote, command: "ls"
     sshCommand remote: remote, command: "kubectl apply -f mydockerprj.yaml"
   }
