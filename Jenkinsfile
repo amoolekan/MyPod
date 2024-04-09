@@ -95,7 +95,7 @@ node {
   remote.password = 'Solution@123'
   remote.allowAnyHosts = true
   stage('Remote SSH') {
-    sshCommand remote: remote, command: "cd kubeworkspace"
-    sshCommand remote: remote, command: "kubectl apply -f myydockerprj.yaml"
+    sshCommand remote: remote, command: "sudo cd kubeworkspace"
+    sshCommand remote: remote, command: "sudo kubectl apply -f myydockerprj.yaml"
   }
 }
