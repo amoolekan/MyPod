@@ -63,7 +63,9 @@ stages{
         }  
 
     stage('Remote SSH') {
+        steps {
     sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mydockerprj.yaml"
+}
 }
 
     // 9. Copy yaml file to minikube cluster server
