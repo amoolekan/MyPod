@@ -78,7 +78,6 @@ node {
   }
 }
 
-
     // 9. Copy yaml file to minikube cluster server
         stage('Build Info'){
             steps {
