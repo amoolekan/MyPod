@@ -28,11 +28,11 @@ stages{
                     }  
     
     // 4. Renaming the package to Test.war
-        stage('Rename Package'){
-            steps {
-                sh 'mv ${WORKSPACE}/target/*.war ${WORKSPACE}/target/test.war'
-                  }
-                    }
+      //  stage('Rename Package'){
+        //    steps {
+           //     sh 'mv ${WORKSPACE}/target/*.war ${WORKSPACE}/target/test.war'
+           //       }
+           //         }
 
     
     // 5. Build the docker image with doockefile and tag it.
