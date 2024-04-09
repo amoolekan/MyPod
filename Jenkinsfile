@@ -63,9 +63,8 @@ stages{
         }  
      
 }
-    
-}
-    // 8. Connect to minikube and run kubectl command
+
+       // 8. Connect to minikube and run kubectl command
 node {
   def remote = [:]
   remote.name = 'minikube'
@@ -86,3 +85,7 @@ node {
            }
       }
 
+
+    
+}
+ 
