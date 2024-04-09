@@ -78,7 +78,7 @@ node {
   }
 }
 
-stages{
+
     // 9. Copy yaml file to minikube cluster server
         stage('Build Info'){
             steps {
@@ -86,4 +86,4 @@ stages{
                 sh 'echo This is the build URL ${BUILD_URL}'
            }
       }
-}
+
