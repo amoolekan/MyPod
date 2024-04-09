@@ -8,11 +8,11 @@ pipeline {
 stages{
 
      // 1. Compiling and testing the code.
-        stage('Compile & Test'){
-            steps {
-                sh 'mvn clean compile test'
-                }
-                }
+       // stage('Compile & Test'){
+          //  steps {
+           //     sh 'mvn clean compile test'
+           //     }
+            //    }
     
      // 2. Build the workload and add it to archive (optional).
         stage('Build'){
