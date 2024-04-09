@@ -60,14 +60,25 @@ stages{
             steps {
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'SSH_MINIKUBE', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
             }
-        }  
+        } 
 
-    stage('Remote SSH') {
-        steps {
-    sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mydockerprj.yaml"
-}
-}
+    
+ stage('SSH') {
+         steps {
+           script {
+                def remote = [:]
+  remote.name = 'minikube'
+  remote.host = '172.31.46.174'
+  remote.user = 'olalekan'
+  remote.password = 'Solution@123'
+  remote.allowAnyHosts = true
+               sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mydockerprj.yaml"
+           }
+         } 
+      }
 
+
+    
     // 9. Copy yaml file to minikube cluster server
         stage('Build Info'){
             steps {
@@ -79,22 +90,9 @@ stages{
 
     
 }
-
-
-
+    
 }
 
-// 8. Connect to minikube and run kubectl command
-node {
-  def remote = [:]
-  remote.name = 'minikube'
-  remote.host = '172.31.46.174'
-  remote.user = 'olalekan'
-  remote.password = 'Solution@123'
-  remote.allowAnyHosts = true
-
-  }
-
-  
 
 
+    
