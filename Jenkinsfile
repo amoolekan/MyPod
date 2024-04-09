@@ -7,11 +7,10 @@ pipeline {
     
 stages{
 
-     // 1. Compiling anf testing the code.
+     // 1. Compiling and testing the code.
         stage('Compile & Test'){
             steps {
                 sh 'mvn clean compile test'
-                sh 'echo Test completed'
                 }
                 }
     
@@ -19,11 +18,10 @@ stages{
         stage('Build'){
             steps {
                 sh 'mvn clean package'
-                sh 'echo Clean build completed'
                 }
                     post {
                         success {
-                            echo 'Archiving the artifacts 3'
+                            echo 'Archiving the artifacts ${BUILD_ID}'
                             archiveArtifacts artifacts: '**/target/*.war'
                     }
                     }
