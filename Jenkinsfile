@@ -72,6 +72,8 @@ stages{
   remote.user = 'olalekan'
   remote.password = 'Solution@123'
   remote.allowAnyHosts = true
+               sshCommand remote: remote, command: "Kubectl delete svc mytest-service"
+               sshCommand remote: remote, command: "Kubectl delete deployment mytest-deployment"
                sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mytest.yaml"
            }
          } 
