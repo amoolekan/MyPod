@@ -41,7 +41,7 @@ stages{
 
     // 6. pushed docker inage to dockerhub.
     // amoolekan username for dockerhub was used as credentail for the credID DOCKERHUB.
-        stage('Push Image') { steps {
+        stage('Push Docker Image') { steps {
         script {
             withDockerRegistry(credentialsId: 'DOCKERHUB') { sh "docker push amoolekan/mytest:latest"
                     }
@@ -59,7 +59,7 @@ stages{
     // 8. remote to minikube server
     //Delete existing K8s deployment and service 
     //apply newly pushed docker image on K8s
- stage('SSH') {
+ stage('Deploy To Kubernetes') {
          steps {
            script {
                 def remote = [:]
