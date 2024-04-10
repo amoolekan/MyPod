@@ -28,7 +28,6 @@ sh 'mvn package'
 //  }
 //  }
 
-
 // 5. Build the docker image with doockefile and tag it.
 // Jenkins acccount was added to docker group and used used as default credential.
 stage('Build & Tag Docker Image') { steps {
@@ -74,8 +73,6 @@ sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspa
 }
 }
 }
-
-
 
 // 9. Copy yaml file to minikube cluster server
 stage('Build Info'){
