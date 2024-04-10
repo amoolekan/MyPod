@@ -72,7 +72,7 @@ stages{
   remote.user = 'olalekan'
   remote.password = 'Solution@123'
   remote.allowAnyHosts = true
-               sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mydockerprj.yaml"
+               sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mytest.yaml"
            }
          } 
       }
