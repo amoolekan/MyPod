@@ -14,20 +14,14 @@ stages{
            //     }
             //    }
     
-     // 2. Build the workload and add it to archive (optional).
-        stage('Build'){
+     // 2. Build the war file.
+        stage('Build Package'){
             steps {
-                sh 'mvn clean package'
+                sh 'mvn package'
                 }
-                    post {
-                        success {
-                            echo 'Archiving the artifacts ${BUILD_ID}'
-                            archiveArtifacts artifacts: '**/target/*.war'
-                    }
-                    }
                     }  
     
-    // 4. Renaming the package to Test.war
+    // 4. Renaming the package to test.war
       //  stage('Rename Package'){
         //    steps {
            //     sh 'mv ${WORKSPACE}/target/*.war ${WORKSPACE}/target/test.war'
@@ -45,7 +39,7 @@ stages{
                     }
                     }    
 
-    // 6. image pushed to dockerhub.
+    // 6. pushed docker inage to dockerhub.
     // amoolekan username for dockerhub was used as credentail for the credID DOCKERHUB.
         stage('Push Image') { steps {
         script {
@@ -62,7 +56,9 @@ stages{
             }
         } 
 
-    
+    // 8. remote to minikube server
+    //Delete existing K8s deployment and service 
+    //apply newly pushed docker image on K8s
  stage('SSH') {
          steps {
            script {
