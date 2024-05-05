@@ -63,6 +63,7 @@ withDockerRegistry(credentialsId: 'DOCKERHUB') { sh "docker push amoolekan/mytes
 stage('K8-Deploy') {
 steps {
 withKubeConfig(caCertificate: '', clusterName: 'my-webapp', contextName: '', credentialsId: 'k8-token', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://4AAA76E599ABD3637EB03F1050D1EBDD.yl4.eu-north-1.eks.amazonaws.com') {
+sh 'kubectl delete deployment mytest-deployment'
 sh 'kubectl apply -f mytest.yaml'
 sh 'kubectl get pods '
 sh 'kubectl get svc'
