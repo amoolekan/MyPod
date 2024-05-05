@@ -7,20 +7,31 @@ maven 'MVN'
 
 stages{
 
-// 2. Build the war file.
+// 1. Build the war file.
 stage('Build'){
 steps {
 sh 'mvn clean package'
 }
 }
 
-// 1. Compiling and testing the code.
+// 2. testing the build.
 stage('Test'){
 steps {
 sh 'mvn test'
 }
 }
 
+  
+// 3. Code Analysis
+stage('Code Analysis'){
+steps {
+//withSonarQubeEnv(credentialsId: 'sonarqube-jenkins', installationName: 'Sonarqube') {
+withSonarQubeEnv(installationName: 'Sonarqube') {
+ sh "mvn sonar:sonar"
+}
+}
+}
+  
 // 4. Renaming the package to test.war
 //  stage('Rename Package'){
 //  steps {
@@ -38,7 +49,7 @@ withDockerRegistry(credentialsId: '') { sh "docker build -t amoolekan/mytest:lat
 }
 }
 
-// 6. pushed docker inage to dockerhub.
+// 6. Push docker inage to dockerhub.
 // amoolekan username for dockerhub was used as credentail for the credID DOCKERHUB.
 stage('Push Docker Image') { steps {
 script {
@@ -48,18 +59,70 @@ withDockerRegistry(credentialsId: 'DOCKERHUB') { sh "docker push amoolekan/mytes
 }
 }
 
-// 7. Copy yaml file to minikube cluster server
+// 7. Deploy K8
 stage('K8-Deploy') {
 steps {
 withKubeConfig(caCertificate: '', clusterName: 'my-webapp', contextName: '', credentialsId: 'k8-token', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://4AAA76E599ABD3637EB03F1050D1EBDD.yl4.eu-north-1.eks.amazonaws.com') {
-sh 'kubectl apply -f deployment-service.yml'
+sh 'kubectl apply -f mytest.yaml'
 sh 'kubectl get pods '
 sh 'kubectl get svc'
 }
 }
 }
 
-// 9. Copy yaml file to minikube cluster server
+// 8. Email Notification 
+stage('Email Notification'){
+steps {
+sh 'echo Sending email'
+}
+    
+post {
+    
+always {
+emailext (
+subject: '$DEFAULT_SUBJECT',
+to: '$DEFAULT_RECIPIENTS',
+body: '$DEFAULT_CONTENT', 
+attachLog: 'true',
+recipientProviders: [ requestor() ]
+)
+}
+    
+//success {
+//emailext (
+//subject: '$DEFAULT_SUBJECT',
+//to: '$DEFAULT_RECIPIENTS',
+//body: '$DEFAULT_CONTENT', 
+//attachLog: 'true',
+//recipientProviders: [ requestor() ]
+//)
+//}
+
+//failure {
+//emailext (
+//subject: '$DEFAULT_SUBJECT',
+//to: '$DEFAULT_RECIPIENTS',
+//body: '$DEFAULT_CONTENT', 
+//attachLog: 'true',
+//recipientProviders: [ requestor() ]
+//)
+//}
+    
+//unstable {
+//emailext (
+//subject: '$DEFAULT_SUBJECT',
+//to: '$DEFAULT_RECIPIENTS',
+//body: '$DEFAULT_CONTENT', 
+//attachLog: 'true',
+//recipientProviders: [ requestor() ]
+//)
+//}
+    
+}    
+}
+
+  
+// 9. Build Information
 stage('Build Info'){
 steps {
 sh 'echo This is the build Id ${BUILD_ID}'
