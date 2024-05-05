@@ -7,17 +7,17 @@ maven 'MVN'
 
 stages{
 
-// 1. Compiling and testing the code.
-// stage('Compile & Test'){
-// steps {
-// sh 'mvn clean compile test'
-// }
-// }
-
 // 2. Build the war file.
-stage('Build Package'){
+stage('Build'){
 steps {
-sh 'mvn package'
+sh 'mvn clean package'
+}
+}
+
+// 1. Compiling and testing the code.
+stage('Test'){
+steps {
+sh 'mvn test'
 }
 }
 
@@ -29,7 +29,7 @@ sh 'mvn package'
 //  }
 
 // 5. Build the docker image with doockefile and tag it.
-// Jenkins acccount was added to docker group and used used as default credential.
+// Jenkins acccount was added to docker group and used as default credential.
 stage('Build & Tag Docker Image') { steps {
 script {
 withDockerRegistry(credentialsId: '') { sh "docker build -t amoolekan/mytest:latest ."
@@ -49,27 +49,12 @@ withDockerRegistry(credentialsId: 'DOCKERHUB') { sh "docker push amoolekan/mytes
 }
 
 // 7. Copy yaml file to minikube cluster server
-stage('Copy YAML'){
+stage('K8-Deploy') {
 steps {
-sshPublisher(publishers: [sshPublisherDesc(configName: 'SSH_MINIKUBE', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
-}
-}
-
-// 8. remote to minikube server
-//Delete existing K8s deployment and service
-//apply newly pushed docker image on K8s
-stage('Deploy To Kubernetes') {
-steps {
-script {
-def remote = [:]
-remote.name = 'minikube'
-remote.host = '172.31.46.174'
-remote.user = 'olalekan'
-remote.password = 'Solution@123'
-remote.allowAnyHosts = true
-//sshCommand remote: remote, command: "kubectl delete svc mytest-service"
-sshCommand remote: remote, command: "kubectl delete deployment mytest-deployment"
-sshCommand remote: remote, command: "kubectl apply -f /home/olalekan/kubeworkspace/mytest.yaml"
+withKubeConfig(caCertificate: '', clusterName: 'my-webapp', contextName: '', credentialsId: 'k8-token', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://4AAA76E599ABD3637EB03F1050D1EBDD.yl4.eu-north-1.eks.amazonaws.com') {
+sh 'kubectl apply -f deployment-service.yml'
+sh 'kubectl get pods '
+sh 'kubectl get svc'
 }
 }
 }
